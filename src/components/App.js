@@ -3,6 +3,7 @@ import '../css/cards.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './ForecastCards.js'
 import unixDateBuilder from './utils';
+import config from '../config'
 
 import axios from 'axios';
 
@@ -21,10 +22,9 @@ import ForecastCards from './ForecastCards.js';
       er fylki(obj) og inniheldur alla spá fyrir þann dag, og mapa það á cards
 ??????    
 ///////////////////// */
-
 const api = {
-  key_weather: "75166bb3bd012843bc1f970bb48fcbe4",
-  key_geoloc: '2bed822d700b52030b3f9239fb8b4961',
+  key_weather: config.weather_key,
+  key_geoloc: config.geoloc_key,
 
 
   base_pt1: 'https://api.openweathermap.org/data/2.5/onecall?',
@@ -80,6 +80,7 @@ function App() {
 
 
   return (
+    
     <div className="app">
       <main>
         <div className="search-box">
