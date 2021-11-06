@@ -3,19 +3,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import unixDateBuilder from './utils';
 import React, {useState, useEffect} from 'react';
 
-/**
- * 
- * Setja þær uppl sem eiga að vera í hverju cardi
- * Gera eventhandler fyrir mismunandi klst
- * Læra betur á cards, col og rows til að gera cördin responsive
- *   Helst þannig að það eru alltaf 5 í röð lóð eða lárétt
- */
-
 
 function ForecastCards (props){
-
-
-
 
 
 

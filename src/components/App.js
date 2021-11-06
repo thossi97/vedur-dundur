@@ -10,18 +10,7 @@ import axios from 'axios';
 import React, {useState, useEffect} from 'react';
 import ForecastCards from './ForecastCards.js';
 
-/****** TODO *******\
 
-- gera event handler til að breyta hita stigi á cards eftir tíma dags
-
-?????
-- mögulega þá gera annað component til að sjá um það allt neðantalið,,
-    * gera eitt fylki fyrir hvern dag
-    * senda þær uppl á app.js 
-      eitthvað sem skilar objecti á stærð 5(dagarnir), hvert item 
-      er fylki(obj) og inniheldur alla spá fyrir þann dag, og mapa það á cards
-??????    
-///////////////////// */
 const api = {
   key_weather: config.weather_key,
   key_geoloc: config.geoloc_key,
