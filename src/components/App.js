@@ -39,7 +39,7 @@ function App() {
         const result = response.data
         setCoordinates({lat:result.data[0].latitude, long: result.data[0].longitude})
         console.log(coordinates)
-        setLoc(query)
+        setLoc(result.data[0].name)
       })
       .catch(err => {
         console.error('Error', err)
