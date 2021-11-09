@@ -1,8 +1,7 @@
 import '../css/common.css';
-import '../css/cards.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './ForecastCards.js'
-import unixDateBuilder from './utils';
+import {unixDateBuilder, windDirectionConverter} from './utils';
 import config from '../config'
 
 import axios from 'axios';
@@ -86,7 +85,7 @@ function App() {
         <div>
 
           <div className="location-box">  
-            <div className="date">{unixDateBuilder(weather.current.dt)}</div>
+            <div className="date">{unixDateBuilder(weather.current.dt).full}</div>
             <div className="location">{loc}</div>
           </div>
 
@@ -96,6 +95,9 @@ function App() {
             </div>
             <div className="weather">
             {weather.current.weather[0].main}
+            </div>
+            <div className="wind">
+              <p>{windDirectionConverter(weather.current.wind_deg)+" "+weather.current.wind_speed+" m/s"}</p>
             </div>
           </div> 
 
