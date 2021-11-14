@@ -1,5 +1,6 @@
 import '../css/common.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import ShowMoreText from "react-show-more-text";
 import './ForecastCards.js'
 import {unixDateBuilder, windDirectionConverter} from './utils';
 import config from '../config'
@@ -21,7 +22,7 @@ const api = {
 
 }
 
-
+const warningicon = 'images/alert/warningicon.png'
 
 function App() {
 
@@ -43,6 +44,7 @@ function App() {
       })
       .catch(err => {
         console.error('Error', err)
+        alert("no resuts")
       })
     
     }
@@ -65,12 +67,29 @@ function App() {
      }, [coordinates]);
 
 
+  const executeOnClick = (isExpanded) => {
+    console.log(isExpanded);
+  }
 
+  
+  const breakLine = (input) => {
 
+    const arr = input.split('\n');
+    const resultArr = [];
+    arr.forEach((item, i) => {
+      if(i%2===1) resultArr.push(<br />);
+      resultArr.push(item);  
+    });
+    return (
+      <p key="alert"className="alert-text"> {resultArr} </p>)
+    }
+
+  
   return (
     
     <div className="app">
       <main>
+      
         <div className="search-box">
           <input
             type="text"
@@ -81,6 +100,36 @@ function App() {
             onKeyPress={search}
           />
         </div>
+        {typeof weather.alerts != "undefined" ? (
+        <div className="alert-box">
+          <div className="container-fluid'">
+            <div className="row justify-content-center">
+              <div  className="col-xs-12  col-sm-12 col-md-10 col-lg-10">
+                <div className="card">
+                  <img  className="card-img " src={warningicon} alt="logo"></img>
+                  <div className="card-body">
+                    <ShowMoreText
+                        // Default options 
+                        lines={1}
+                        more="Show more"
+                        less="Show less"
+                        className="card-text"
+                        anchorClass="my-anchor-css-class"
+                        onClick={executeOnClick}
+                        expanded={false}
+                        width={/*breyta*/ 0}
+                        truncatedEndingComponent={"... "}
+                    >
+                      {breakLine(weather.alerts[0].description ) }
+                    </ShowMoreText>
+                 
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>      
+        </div>
+ ): ('')}
         {typeof weather.current != "undefined" ? (
         <div>
 
@@ -96,8 +145,13 @@ function App() {
             <div className="weather">
             {weather.current.weather[0].main}
             </div>
-            <div className="wind">
-              <p>{windDirectionConverter(weather.current.wind_deg)+" "+weather.current.wind_speed+" m/s"}</p>
+            <div className="details">
+              <div className="wind">
+                <p>{windDirectionConverter(weather.current.wind_deg)+" "+weather.current.wind_speed+" m/s"}</p>
+              </div>
+              <div className="humidity">
+                <p>{weather.current.humidity+"%"}</p>
+              </div>
             </div>
           </div> 
 

@@ -11,25 +11,25 @@ body {
     
 }
 
-.app{
+/*.app{
     background-image: url('../assets/tree.jpg');
     background-size: cover;
     background-position: top;
     transition: 0.4 ease-out;
 
-}
+}*/
 
 
 main {
     min-height: 100vh;
-    background-image: linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,0.3));
+    background-image: linear-gradient(to top, rgba(0,0,0,0.3), rgba(0, 0, 0, 0.5));
     padding: 25px;
     
 }
 
 .search-box{
     width: 100%;
-    margin: 0 0 75px;
+    margin: 0 0 1rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -114,5 +114,34 @@ main {
 
 }
 
+
+
+/* ALERT CSS */
+.alert-text {
+    margin-bottom: 0px;
+    
+}
+
+.alert-box{
+    margin: 0 0 1rem;
+}
+.alert-box .card {
+    flex-direction: row;
+    align-items: center;
+ 
+    background-color: rgba(250, 69, 69, 0.445);
+    border-color: rgb(255, 0, 0);
+  }
+
+.alert-box .card-text {
+   display: inline-block;
+   text-align: left;
+}
+
+ .alert-box .card img {
+    width: 2rem;
+    height: 2rem;
+    margin: 3px;
+ }
 
   

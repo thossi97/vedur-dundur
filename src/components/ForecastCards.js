@@ -16,7 +16,7 @@ function ForecastCards (props){
                     <div className="row justify-content-center">
                    { props.weather.map((weather) => (
                       <div key={weather.sunrise} className="col-xs-12  col-sm-12 col-md-2 col-lg-2">
-                        <div key="card" className="card-body">
+                        <div key="card" className="card">
                           <img key="icon" className="card-img-top" src={'images/card_icons/'+weather.weather[0].main+'.png'} alt="logo"></img>
                           <div key="card-body" className="card-body">
                             <h3 key="date" className="card-date">{unixDateBuilder(weather.dt).day}</h3>
