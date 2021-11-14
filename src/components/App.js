@@ -11,6 +11,8 @@ import React, {useState, useEffect} from 'react';
 import ForecastCards from './ForecastCards.js';
 
 
+import Interweave from 'interweave';
+
 const api = {
   key_weather: config.weather_key,
   key_geoloc: config.geoloc_key,
@@ -27,7 +29,7 @@ const warningicon = 'images/alert/warningicon.png'
 function App() {
 
   const [query, setQuery] = useState("")
-  const [coordinates, setCoordinates] = useState({lat: 64.09, long: -21.86})
+  const [coordinates, setCoordinates] = useState({lat: 64.13, long: -21.87})
   const [weather, setweather] = useState({})
   const [forecast, setForecast] = useState([])
   const [loc, setLoc] = useState("Reykjavík")
@@ -40,10 +42,18 @@ function App() {
         const result = response.data
         setCoordinates({lat:result.data[0].latitude, long: result.data[0].longitude})
         console.log(coordinates)
-        setLoc(result.data[0].name)
+        console.log(result)
+        if(result.data[0].name === "Capital Region"){
+          setLoc(result.data[1].name)
+        }
+        else {
+          setLoc(result.data[0].name)
+        }
       })
       .catch(err => {
         console.error('Error', err)
+        setLoc(loc)
+        setCoordinates(coordinates)
         alert("no resuts")
       })
     
@@ -72,19 +82,6 @@ function App() {
   }
 
   
-  const breakLine = (input) => {
-
-    const arr = input.split('\n');
-    const resultArr = [];
-    arr.forEach((item, i) => {
-      if(i%2===1) resultArr.push(<br />);
-      resultArr.push(item);  
-    });
-    return (
-      <p key="alert"className="alert-text"> {resultArr} </p>)
-    }
-
-  
   return (
     
     <div className="app">
@@ -100,6 +97,7 @@ function App() {
             onKeyPress={search}
           />
         </div>
+
         {typeof weather.alerts != "undefined" ? (
         <div className="alert-box">
           <div className="container-fluid'">
@@ -120,7 +118,7 @@ function App() {
                         width={/*breyta*/ 0}
                         truncatedEndingComponent={"... "}
                     >
-                      {breakLine(weather.alerts[0].description ) }
+                    <Interweave content={ weather.alerts[0].description } />
                     </ShowMoreText>
                  
                   </div>
@@ -130,6 +128,7 @@ function App() {
           </div>      
         </div>
  ): ('')}
+ 
         {typeof weather.current != "undefined" ? (
         <div>
 
